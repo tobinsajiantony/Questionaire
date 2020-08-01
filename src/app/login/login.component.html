@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-4 offset-md-4 shadow mt-5 mb-5">
+        <form #loginForm="ngForm" class="mt-5 mb-5" (ngSubmit)="submitLogin(loginForm)">
+            <h3>Login</h3>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" [ngModel]
+                  class="form-control form-control-sm" email required #email="ngModel" name="email" id="email" aria-describedby="helpId" placeholder="">
+              <small *ngIf="email.invalid && email.touched" id="helpId" class="form-text text-danger">Enter Valid Email!</small>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" [ngModel] #password="ngModel" required
+                class="form-control" name="password" id="password" placeholder="Enter Password">
+                <small *ngIf="password.invalid && password.touched" id="helpId" class="form-text text-danger">Enter Password!</small>
+            </div>
+            <div *ngIf="!loginMode" class="form-group">
+                <label for="password">Re-Enter Password</label>
+                <input type="password" [ngModel] #reEnterPassword="ngModel" required
+                  class="form-control" name="reenterPassword" id="password" placeholder="Re-Enter Password">
+                  <small *ngIf="reEnterPassword.invalid && reEnterPassword.touched" id="helpId" class="form-text text-danger">Re-Enter Password!</small>
+              </div>
+            <button [disabled]="loginForm.invalid" type="submit" class="btn btn-block btn-primary">{{ loginMode === true ? 'Login' : 'Register'}}</button>
+            <button type="button" (click)="switchLoginMode()" class="btn btn-block btn-primary">{{loginMode === true ? "Don't have an account?/Register" : 'Sign-In Instead'}}</button>
+        </form>
+    </div>
+</div>

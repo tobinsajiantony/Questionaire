@@ -1,0 +1,25 @@
+<div class="row m-2" *ngIf="quizMode">
+    <div class="col p-2">
+        <h4>Question</h4>
+        <hr>
+        <h2 class="mb-5 mt-4">{{question.question}}</h2>
+        <div class="row">
+            <div class="col-md-5 m-1 mb-3" *ngFor="let option of question.options">
+                <button (click)="optionClicked(option.optionId)"
+                  [ngClass]="{'btn-primary': option.optionId === userValue && answerMode === false
+                  , 'btn-outline-primary': (option.optionId != userValue && answerMode === false) || (answerMode === true && option.isAnswer === false && option.optionId != userValue)
+                  , 'btn-success': answerMode === true && option.isAnswer === true
+                  , 'btn-danger': answerMode === true && option.isAnswer === false && option.optionId === userValue}"
+                  class="btn btn-lg btn-block">
+                  {{option.optionValue}}
+                </button>
+            </div>
+        </div>
+        <div class="row mt-5 ml-5">
+            <div class="col-md-4 offset-md-3" *ngIf="!answerMode">
+                <button (click)="clearClick()" class="btn btn-primary mr-1 ml-2">Clear</button>
+                <button (click)="nextClick()" class="btn btn-primary ml-2">Next</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+.list-group{
+    max-height: 50vh;
+    overflow: hidden;
+}
+
+.list-group1{
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+.list-group:hover{
+    overflow-y: scroll;
+}

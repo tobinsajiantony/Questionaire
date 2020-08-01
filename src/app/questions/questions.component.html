@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-md-6 p-5">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary mb-2" (click)="addNewQuestion()"> + Add New Questions</button>
+                <ul class="list-group">
+                    <li *ngFor="let q of questions;let i = index" class="list-group-item" (mouseenter)="isHover = i"
+                        (mouseleave)="isHover = ''" (click)="questionClicked(q.questionId)" [ngClass]="{'list-group-item-secondary' : isHover === i,'list-group-item-dark' : q.questionId === questionId}">
+                        <h5>Question {{i + 1}} <span *ngIf="isHover === i && q.questionId != questionId" class="badge badge-secondary"
+                                style="float: right;">Edit</span></h5>
+                        <p>{{q.question}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 p-5">
+        <app-question-edit></app-question-edit>
+     </div>
+</div>

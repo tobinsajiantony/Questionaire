@@ -1,0 +1,40 @@
+<div class="row overflow-auto">
+    <div class="col-md-5 p-4">
+        <button *ngIf="!testFinished" [ngClass]="{'btn-primary': !testStarted, 'btn-danger': testStarted}"
+            [disabled]="!enableTest" (click)="startTestClicked()"
+            class="btn btn-lg btn-block mb-3">{{testStarted === true ? 'STOP TEST' : 'START TEST'}}</button>
+        <div class="row" *ngIf="!testFinished">
+            <div class="col">
+                <li class="list-group-item shadow-lg mb-4">
+                    <h1 [ngClass]="{'text-danger': warning}" style="text-align: center;">{{timeLeft}}</h1>
+                </li>
+            </div>
+        </div>
+        <ul *ngIf="testStarted || viewAnswers" 
+        [ngClass]="{'list-group1': viewAnswers === true}"
+        class="list-group">
+            <li *ngFor="let q of questions;let i = index" class="list-group-item list-group-item-action shadow mb-2"
+                (mouseenter)="isHover = i" (mouseleave)="isHover = ''" (click)="questionClicked(q.questionId)"
+                [ngClass]="{'list-group-item-secondary' : isHover === i,
+                'list-group-item-dark' : q.questionId === questionId && viewAnswers === false,
+                'list-group-item-success': viewAnswers === true && q.isCorrect === true,
+                'list-group-item-danger': viewAnswers === true && q.isCorrect === false,
+                'list-group-item-warning': viewAnswers === true && q.isCorrect == null}">
+                <h5>Question {{i + 1}} <span *ngIf="isHover === i" class="badge" [ngClass]="{
+                            'badge-secondary': viewAnswers === false && q.userValue == null,
+                            'badge-info': viewAnswers === false && q.userValue != null,
+                            'badge-success': viewAnswers === true && q.isCorrect === true,
+                            'badge-danger': viewAnswers === true && q.isCorrect === false,
+                            'badge-warning': viewAnswers === true && q.isCorrect == null
+                        }"
+                        style="float: right;">{{ viewAnswers === false && q.userValue == null ? 'Not Attempted' : (viewAnswers === false && q.userValue != null ? 'Attempted' : '') }}
+                        {{ viewAnswers === true && q.isCorrect === true ? 'Correct' : (viewAnswers === true && q.isCorrect === false ? 'Wrong' : (viewAnswers === true && q.isCorrect == null ? 'Not Attempted' : '')) }}</span>
+                </h5>
+                <p>{{q.question}}</p>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-7">
+        <app-quiz-answers></app-quiz-answers>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+.custom-form-group{
+    max-height: 70vh;
+    overflow: hidden;
+  }
+  
+  .custom-form-group{
+    overflow-y: scroll;
+  }
